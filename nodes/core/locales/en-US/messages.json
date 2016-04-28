@@ -185,6 +185,8 @@
             "string": "the string",
             "number": "the number",
             "existing": "the existing msg.payload",
+            "first": "msg.payload from the first message",
+            "last": "msg.payload from the last message",
             "nothing": "nothing"
         },
         "wait-reset": "wait to be reset",

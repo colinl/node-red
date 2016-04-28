@@ -43,10 +43,11 @@
     </div>
     <div class="form-row node-type-wait">
         <span data-i18n="trigger.then-send"></span>
-        <select id="node-input-op2type" style="width:200px !important">
+        <select id="node-input-op2type" style="width:300px !important">
             <option value="val" data-i18n="trigger.output.string"></option>
             <option value="num" data-i18n="trigger.output.number"></option>
-            <option value="pay" data-i18n="trigger.output.existing"></option>
+            <option value="pay" data-i18n="trigger.output.first"></option>
+            <option value="paylast" data-i18n="trigger.output.last"></option>
             <option value="nul" data-i18n="trigger.output.nothing"></option>
         </select>
         <input style="width: 145px !important" type="text" id="node-input-op2">
@@ -69,8 +70,11 @@
     <p>Creates two messages on the output separated by a timeout whenever <i>any</i> <code>msg</code> arrives on the input.</p>
     <p>For example, this can be used to toggle a Raspberry PI GPIO pin on and off.</p>
     <p>The two output states can be specified as can the duration of the timer.
-    Either output can be set to a value, or templated from the inbound
+    Either output can be set to a value, to the payload of the received message, or templated from the inbound
     <code>msg</code> using mustache syntax. <pre>The payload is {{payload}}</pre></p>
+    <p>In addition the second message payload may be set to that of the initial 
+    message received, or in the situation where more than one message is received
+    within the timeout then it may be set to the payload of the last message.</p>
     <p>If the <code>msg.payload</code> is an object then setting the output to
     <i>existing payload</i> will pass the complete payload object through.</p>
     <p>Optionally the timer can be extended by being retriggered... or not.</p>

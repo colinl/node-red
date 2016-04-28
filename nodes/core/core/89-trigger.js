@@ -59,7 +59,7 @@ module.exports = function(RED) {
             }
             else {
                 if ((!tout) && (tout !== 0)) {
-                    if (node.op2type === "pay") { m2 = msg.payload; }
+                    if (node.op2type === "pay"  ||  node.op2type === "paylast") { m2 = msg.payload; }
                     else if (node.op2Templated) { m2 = mustache.render(node.op2,msg); }
                     else { m2 = node.op2; }
                     if (node.op1type === "pay") { }
@@ -78,6 +78,7 @@ module.exports = function(RED) {
                     node.status({fill:"blue",shape:"dot",text:" "});
                 }
                 else if ((node.extend === "true" || node.extend === true) && (node.duration > 0)) {
+                    if (node.op2type === "paylast") { m2 = msg.payload; }
                     clearTimeout(tout);
                     tout = setTimeout(function() {
                         msg.payload = m2;
@@ -85,7 +86,7 @@ module.exports = function(RED) {
                         tout = null;
                         node.status({});
                     },node.duration);
-                }
+                } else if (node.op2type === "paylast") { m2 = msg.payload; }
             }
         });
         this.on("close", function() {
